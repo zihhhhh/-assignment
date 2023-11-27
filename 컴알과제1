@@ -1,0 +1,106 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+
+//정수를 2진수로 변환하여 출력하는 함수
+void Binary(int n) {
+    int B[32]; //2진수를 저장할 배열
+    int i;
+
+    //삼항 연산자, n이 음수이면 1을 반환, 양수이면 0을 반환
+    int sign = n < 0 ? 1 : 0;
+
+    //n이 음수일 때 음수부호 생략
+    if (sign) {
+        n = -n;
+    }
+
+    //2진수로 변환
+    for (i = 31; i >= 0; --i) {
+        B[i] = n % 2;
+        n = n / 2;
+    }
+    
+    //n이 음수인 경우 2의 보수로 변환
+    if (sign) {
+        int carry = 1; //
+        for (i = 31; i >= 0; --i) {
+            B[i] = 1 - B[i] + carry; //1의 보수화 및 1을 더하기
+            carry = B[i] / 2;
+            B[i] %= 2;
+        }
+    }
+
+    //2진수 출력
+    for (i = 0; i < 32; ++i) {
+        printf("%d", B[i]);
+    }
+    printf("\n");
+}
+
+//정수를 8진수로 변환하여 출력하는 함수
+void Octal(int n) {
+    int O[20]; //8진수를 저장할 배열 선언
+    int i=0;
+
+    //10진수를 8진수로 변환
+    while (n != 0) {
+        O[i] = n % 8;
+        n = n / 8;
+        i++;
+    }
+
+    //8진수 출력
+    for (int j = i - 1; j >= 0; j--) {
+        printf("%d", O[j]);
+    }
+    printf("\n");
+
+}
+
+//정수를 16진수로 변환하여 출력하는 함수
+void Hex(int n) {
+    char H[16] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };//문자열 배열 변수 선언
+    char T[20] = { }; //문자열 배열 변수 선언
+
+    int i = 0;
+    int M, N;
+
+    //10진수를 16진수로 변환
+    do {
+        M = n / 16;
+        N = n % 16;
+        T[i] = H[N];
+        i++;
+        n = M;
+    } while (M != 0);
+
+    //16진수 출력
+    for (int j = i - 1; j >= 0; --j) {
+        printf("%c", T[j]);
+    }
+    printf("\n");
+}
+
+
+int main() {
+    int n;
+
+    // 사용자로부터 정수 입력 받기
+    printf("32비트 정수를 입력하세요: ");
+    scanf("%d", &n);
+
+
+    // 입력 받은 정수를 2진수로 변환하여 출력
+    printf("2진수: ");
+    Binary(n);
+
+    //입력 받은 정수를 8진수로 변환하여 출력
+    printf("8진수: ");
+    Octal(n);
+
+    //입력 받은 정수를 16진수로 변환하여 출력
+    printf("16진수: ");
+    Hex(n);
+
+    return 0;
+}

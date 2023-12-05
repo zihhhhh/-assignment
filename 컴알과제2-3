@@ -1,0 +1,73 @@
+#include <iostream>
+
+int main() {
+    const int size = 5; //const 변수를 상수화 시키기
+    int A[size][size];
+
+    // 배열 초기화
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            A[i][j] = 0;
+        }
+    }
+
+    int num = size * size;
+    int R = size / 2;
+    int C = size / 2;
+
+    // 시작값 설정
+    int c = 1;
+    A[R][C] = c++; //현재위치에 현재 숫자 할당 후 그 다음 숫자 1을 더한 값을 업데이트
+
+    // 달팽이 모양으로 배열에 값을 넣기
+    int step = 1;
+    while (c <= num) {
+
+        for (int i = 0; i < step; ++i) {
+            // 위로 이동
+            if (R - 1 >= 0 && A[R - 1][C] == 0) {
+                --R;
+                A[R][C] = c++;
+            }
+        }
+
+        for (int i = 0; i < step; ++i) {
+            // 오른쪽으로 이동
+            if (C + 1 < size && A[R][C + 1] == 0) {
+                ++C;
+                A[R][C] = c++;
+            }
+        }
+
+        ++step;
+
+        for (int i = 0; i < step; ++i) {
+            // 아래로 이동
+            if (R + 1 < size && A[R + 1][C] == 0) {
+                ++R;
+                A[R][C] = c++;
+            }
+        }
+
+
+        for (int i = 0; i < step; ++i) {
+            // 왼쪽으로 이동
+            if (C - 1 >= 0 && A[R][C - 1] == 0) {
+                --C;
+                A[R][C] = c++;
+            }
+        }
+
+        ++step;
+    }
+
+    // 배열 출력
+    for (int i = 0; i < size; ++i) {
+        for (int j = 0; j < size; ++j) {
+            std::cout << A[i][j] << ' ';
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}

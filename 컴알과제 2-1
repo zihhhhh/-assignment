@@ -2,29 +2,37 @@
 
 int main()
 {
-	int A[5][5] = {0};
-	int cnt = 0, v = 1;
-	int n=5;
+    // 5x5 행렬을 0으로 초기화
+    int A[5][5] = { 0 };
 
+    // 값 카운팅과 할당을 위한 변수 초기화
+    int cnt = 0, v = 1;
+    int n = 5;
 
-	while (1) {
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < n; j++) {
-				if (i + j == cnt) {
-					A[j][i] = v++;
-				}
-			}
-		}
-		cnt++;
-		if (v - 1 == n * n) break;
-	}
+    // 행렬을 대각선 패턴으로 채우기
+    while (1) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                // 행 인덱스와 열 인덱스의 합이 cnt와 같은지 확인
+                // 대각선 패턴으로 값을 할당
+                if (i + j == cnt) {
+                    A[j][i] = v++;
+                }
+            }
+        }
+        cnt++;
+        // 모든 요소에 값이 할당되면 루프 종료
+        if (v - 1 == n * n) break;
+    }
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			printf("%2d ", A[i][j]);
-		}
-		printf("\n");
-	}
+    // 행렬 출력
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            // 2자리 숫자 형식으로 행렬 출력
+            printf("%2d ", A[i][j]);
+        }
+        printf("\n");
+    }
 
-	return 0;
+    return 0;
 }

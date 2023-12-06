@@ -3,43 +3,43 @@
 int main() {
     int n = 5;
  
-    int array[5][5];
+    int B[5][5];
     int count = 1;
-    int currentX = 0, currentY = 0;
+    int R = 0, C = 0;
 
-    array[currentX][currentY] = count++;
+    B[R][C] = count++;
 
     while (count <= n * n) {
-        if (currentX + 1 < n) {
-            currentX++;
+        if (R + 1 < n) {
+            R++;
         }
         else {
-            currentY++;
+            C++;
         }
 
-        array[currentX][currentY] = count++;
+        B[R][C] = count++;
 
-        while (currentX - 1 > -1 && currentY + 1 < n) {
-            array[--currentX][++currentY] = count++;
+        while (R - 1 > -1 && C + 1 < n) {
+            B[--R][++C] = count++;
         }
 
-        if (currentY + 1 < n) {
-            currentY++;
+        if (C + 1 < n) {
+            C++;
         }
         else {
-            currentX++;
+            R++;
         }
 
-        array[currentX][currentY] = count++;
+        B[R][C] = count++;
 
-        while (currentY - 1 > -1 && currentX + 1 < n) {
-            array[++currentX][--currentY] = count++;
+        while (C - 1 > -1 && R + 1 < n) {
+            B[++R][--C] = count++;
         }
     }
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf("%d ", array[i][j]);
+            printf("%d ", B[i][j]);
         }
         printf("\n");
     }

@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int main() {
+    int n = 5;
+ 
+    int array[5][5];
+    int count = 1;
+    int currentX = 0, currentY = 0;
+
+    array[currentX][currentY] = count++;
+
+    while (count <= n * n) {
+        if (currentX + 1 < n) {
+            currentX++;
+        }
+        else {
+            currentY++;
+        }
+
+        array[currentX][currentY] = count++;
+
+        while (currentX - 1 > -1 && currentY + 1 < n) {
+            array[--currentX][++currentY] = count++;
+        }
+
+        if (currentY + 1 < n) {
+            currentY++;
+        }
+        else {
+            currentX++;
+        }
+
+        array[currentX][currentY] = count++;
+
+        while (currentY - 1 > -1 && currentX + 1 < n) {
+            array[++currentX][--currentY] = count++;
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", array[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
